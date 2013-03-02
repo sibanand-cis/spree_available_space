@@ -1,4 +1,19 @@
-<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+<%= form_tag admin_available_spaces_path ,:method=>"get" do %>
+  <p>
+    <p>Start Date
+    <%= text_field_tag("search[start_date]", !params[:search].blank? && !params[:search]["start_date"].blank? ?  params[:search]["start_date"] : "", :class => 'datepicker')  %>
+    
+     End Date 
+    <%= text_field_tag( "search[end_date]", !params[:search].blank? && !params[:search]["end_date"].blank? ?  params[:search]["end_date"] : "" , :class => 'datepicker') %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+ <% end %>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+
+
+
 <script>
 $(function () {
     var chart;
@@ -22,7 +37,7 @@ $(function () {
                     title: {
                     text: 'Date'
                 },
-                categories: <%= raw @bookings_date%>
+                categories: <%= raw @bookings_date %>
             },
             yAxis: {
                 title: {
