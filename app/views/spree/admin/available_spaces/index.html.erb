@@ -9,66 +9,25 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
  <% end %>
+ <div id="chart_div" style="width: 1200px; height: 500px;"></div>
 
-<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"> </div>
+  <!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(
+          <%=raw @bookings_data.to_a%>
+        );
 
+        var options = {
+          title: 'Company Performance',
+          hAxis: {title: 'Days', titleTextStyle: {color: 'red'}},
+          vAxis:{title:'Occupied Space', maxValue:1000}
+        };
 
-
-<script>
-$(function () {
-    var chart;
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                type: 'line',
-                //marginRight: 130,
-                //marginBottom: 10
-            },
-            title: {
-                text: 'Monthly Average Bookings',
-                x: -20 //center
-            },
-            subtitle: {
-                text: 'Occupied',
-                x: -20
-            },
-            xAxis: {
-                    title: {
-                    text: 'Date'
-                },
-                categories: <%= raw @bookings_date %>
-            },
-            yAxis: {
-                title: {
-                    text: 'Rating'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                },]
-            },
-            tooltip: {
-                formatter: function() {
-                        return '<b>'+ this.series.name +'</b><br/>'+
-                        this.x +': '+ this.y + "box" ;
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -10,
-                y: 100,
-                borderWidth: 0
-            },
-            series: [{
-                name: 'Occupied',
-                data: <%= raw @booking_rate %>
-            }]
-        });
-    });
-    
-});
-</script>
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
