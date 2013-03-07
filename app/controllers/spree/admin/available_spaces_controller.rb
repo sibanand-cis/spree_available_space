@@ -20,3 +20,5 @@ class Spree::Admin::AvailableSpacesController <  Spree::Admin::BaseController
       end unless @bookings.blank?                   
   end        
 end
+
+
