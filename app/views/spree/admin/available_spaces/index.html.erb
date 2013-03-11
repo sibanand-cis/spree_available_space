@@ -11,9 +11,6 @@
  <% end %>
  <div id="chart_div" style="width: 1200px; height: 500px;"></div>
 
-
-
-  <!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart"]});
@@ -24,9 +21,9 @@
         );
 
         var options = {
-          title: 'Company Performance',
+          title: 'Space Availability Report',
           hAxis: {title: 'Days', titleTextStyle: {color: 'red'}},
-          vAxis:{title:'Occupied Space', maxValue:1000}
+          vAxis:{title:'Occupied Space', maxValue: <%= AvailableSpace.total_aval_space %>}
         };
 
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
