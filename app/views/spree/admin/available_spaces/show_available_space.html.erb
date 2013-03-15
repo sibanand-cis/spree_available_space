@@ -1,0 +1,23 @@
+<%= form_tag admin_show_available_space_path ,:method=>"get" do %>
+  <p>
+    <p>Start Date
+    <%= text_field_tag("search[start_date]", !params[:search].blank? && !params[:search]["start_date"].blank? ?  params[:search]["start_date"] : "", :class => 'datepicker')  %>
+    
+     End Date 
+    <%= text_field_tag( "search[end_date]", !params[:search].blank? && !params[:search]["end_date"].blank? ?  params[:search]["end_date"] : "" , :class => 'datepicker') %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+<table>
+	<tr>
+		<th>Date</th>
+		<th>Space</th>
+	</tr>
+<% @bookings_data.each do |date,space| %>
+<tr>
+	<td><b><%= date %></b></td>
+	<td><b><%= space %></b></td>
+
+</tr>
+<% end %>
+</table>

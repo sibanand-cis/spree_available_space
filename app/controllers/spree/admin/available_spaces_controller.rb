@@ -1,7 +1,19 @@
 class Spree::Admin::AvailableSpacesController <  Spree::Admin::BaseController
 
+  before_filter :fetch_bookings_details ,:only => [:index,:show_available_space]
+
 
   def index 
+                  
+  end 
+
+  def show_available_space
+          
+  end   
+
+  protected
+
+    def fetch_bookings_details
       @bookings_data = {}
       @booking_rate = []
       start_date = ((params[:search].blank? ? Time.now.beginning_of_month : (params[:search][:start_date].blank? ? Time.now.beginning_of_month : params[:search][:start_date]))).to_date.strftime("%Y-%m-%d")
@@ -16,8 +28,10 @@ class Spree::Admin::AvailableSpacesController <  Spree::Admin::BaseController
       end        
       @bookings.each do |booking|  
         @bookings_data[booking.day.to_s] = booking.total_space.to_i
-      end unless @bookings.blank?                   
-  end        
+      end unless @bookings.blank?
+    end
+
+        
 end
 
 
