@@ -1,3 +1,4 @@
+
 <%= form_tag admin_show_available_space_path ,:method=>"get" do %>
   <p>
     <p>Start Date
@@ -21,3 +22,5 @@
 </tr>
 <% end %>
 </table>
+
+<%= button_link_to "Graphical Overview of Space Availability",admin_available_spaces_path%>
